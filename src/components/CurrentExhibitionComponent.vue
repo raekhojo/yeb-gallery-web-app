@@ -1,5 +1,6 @@
 <template>
   <section class="container">
+    <yeb-loading v-if="loading"></yeb-loading>
     <div class="d-flex flex-row justify-content-between align-items-center">
       <yeb-subtitle Subtitle="EXHIBITIONS" />
       <ul class="navbar-nav ms-auto mb-lg-0 d-flex flex-row align-items-center">
@@ -65,6 +66,7 @@
 
 <script>
 import YebSubtitle from "@/components/YebSubtitle.vue";
+import YebLoading from "@/components/YebLoading";
 import sanity from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
@@ -81,6 +83,7 @@ const query = `*[_type == "post" && "current" in categories[]->title] | order(_c
 export default {
   components: {
     YebSubtitle,
+    YebLoading,
   },
   data() {
     return {
