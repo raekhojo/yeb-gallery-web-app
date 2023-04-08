@@ -22,5 +22,11 @@ export default {
     HomeExhibition,
     YebFooter,
   },
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  },
 };
 </script>

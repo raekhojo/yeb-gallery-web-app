@@ -8,6 +8,12 @@ export default {
   components: {
     PastExhibitionComponent,
   },
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  },
 };
 </script>
 
