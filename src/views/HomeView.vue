@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <yebs-carousel />
+  <yeb-forth-coming />
+  <home-exhibition />
+  <yeb-news />
+  <yeb-footer />
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import YebsCarousel from "@/components/YebsCarousel.vue";
+import YebForthComing from "@/components/YebForthComing.vue";
+import YebNews from "@/components/YebNews.vue";
+import HomeExhibition from "@/components/HomeExhibition.vue";
+import YebFooter from "@/components/YebFooter.vue";
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   components: {
-    HelloWorld
-  }
-}
+    YebsCarousel,
+    YebNews,
+    YebForthComing,
+    HomeExhibition,
+    YebFooter,
+  },
+};
 </script>
