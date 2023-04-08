@@ -93,11 +93,11 @@ export default {
   },
   created() {
     this.fetchData();
-    setInterval(this.fetchData, 5000);
+    // setInterval(this.fetchData, 5000);
   },
   mounted() {
     this.fetchData();
-    setInterval(this.fetchData, 5000);
+    // setInterval(this.fetchData, 5000);
     this.imageUrlFor();
   },
   methods: {
