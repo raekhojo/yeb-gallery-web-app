@@ -1,6 +1,7 @@
 <template>
   <section class="container">
-    <div class="news-cont position-relative">
+    <yeb-loading v-if="loading"></yeb-loading>
+    <div class="news-cont position-relative" v-else>
       <div class="d-flex flex-row justify-content-between">
         <div class="news-text" v-if="post">
           <h1 class="news-title mb-4">{{ post.title }}</h1>
@@ -28,6 +29,7 @@ import { SanityBlocks } from "sanity-blocks-vue-component";
 import sanity from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 import YebFooter from "@/components/YebFooter.vue";
+import YebLoading from "@/components/YebLoading";
 const imageBuilder = imageUrlBuilder(sanity);
 
 const query = `*[_type == "news" && slug.current == $slug] {
