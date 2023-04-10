@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <yeb-subtitle Subtitle="News" />
-    <div class="row row-cols-3 row-cols-sm-1 row-cols-md-3 g-5">
+    <div class="row row-cols-4 row-cols-sm-1 row-cols-md-4 g-5">
       <div
         class="col mb-4"
         data-aos="fade-up"
@@ -19,7 +19,7 @@
             />
           </div>
           <h2 class="project-title mt-4">{{ post.title }}</h2>
-          <span class="mt-3 date-info">DECEMBER 27, 2022</span>
+          <span class="mt-3 date-info">{{ post.eventdate }}</span>
         </router-link>
       </div>
     </div>
@@ -32,13 +32,13 @@ import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
 
 const query = `*[_type == "news" ] | order(_createdAt desc){
-  _id,
-  title,
-  slug,
-  excerpt,
-  eventdate,
-  "image": mainImage.asset->url
-}  [0...6]`;
+    _id,
+    title,
+    slug,
+    excerpt,
+    eventdate,
+    "image": mainImage.asset->url
+  }  [0...50]`;
 export default {
   components: {
     YebSubtitle,
@@ -96,7 +96,7 @@ export default {
 }
 
 .project-title {
-  font-size: 18px;
+  font-size: 16.2px;
   text-transform: uppercase;
   font-family: "Josefin Slab", serif;
   line-height: 25px;
@@ -107,8 +107,8 @@ export default {
 }
 
 .project-image {
-  width: 346.63px;
-  height: 228.77px;
+  width: 250px;
+  height: 166.66px;
 }
 
 .project-image img {
@@ -135,6 +135,7 @@ export default {
     width: 100% !important;
   }
 }
+
 .news-link {
   text-decoration: none;
   color: black;

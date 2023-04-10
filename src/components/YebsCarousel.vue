@@ -160,8 +160,8 @@ button:hover {
   font-size: 32px;
   line-height: 3.1rem;
   margin: 0 0 22px;
-  font-family: "Barlow", serif;
-  font-weight: 400;
+  font-family: "Josefin Slab", serif;
+  font-weight: 700;
   letter-spacing: 4.32px;
 }
 .date-info {

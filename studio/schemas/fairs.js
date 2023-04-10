@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'news',
-  title: 'News',
+  name: 'fairs',
+  title: 'Fairs',
   type: 'document',
   fields: [
     defineField({
@@ -25,14 +25,26 @@ export default defineType({
       type: 'reference',
       to: {type: 'author'},
     }),
+    defineField({
+      name: 'exhibitingartist',
+      title: 'Exhibiting Artist',
+      type: 'array',
+      of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'brief',
+      title: 'Brief',
+      type: 'string',
+    }),
     {
-      name: 'excerpt',
+      name: 'location',
       title: 'Location',
       type: 'string',
       options: {
         maxLength: 200,
       },
     },
+
     {
       name: 'eventdate',
       title: 'Date Of The Event',
@@ -45,6 +57,15 @@ export default defineType({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'fairImage',
+      title: 'Fair images',
+      type: 'array',
+      of: [{type: 'image'}],
       options: {
         hotspot: true,
       },

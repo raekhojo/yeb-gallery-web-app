@@ -71,7 +71,7 @@
           </li>
           <li class="nav-item">
             <router-link
-              to="/press"
+              to="#"
               class="nav-link active fw-normal me-4"
               aria-current="page"
               href="#contact"

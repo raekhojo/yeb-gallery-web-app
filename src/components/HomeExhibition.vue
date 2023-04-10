@@ -98,12 +98,12 @@ export default {
 .project-title {
   font-size: 18px;
   text-transform: uppercase;
-  font-family: "Barlow", sans-serif;
+  font-family: "Josefin Slab", serif;
   line-height: 25px;
   vertical-align: top;
   letter-spacing: 2px;
   word-spacing: 0px;
-  font-weight: 300 !important;
+  font-weight: 600 !important;
 }
 
 .project-image {
