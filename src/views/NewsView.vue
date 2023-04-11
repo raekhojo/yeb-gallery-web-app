@@ -8,6 +8,12 @@ export default {
   components: {
     YebFullNews,
   },
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  },
 };
 </script>
 

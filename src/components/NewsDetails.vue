@@ -19,6 +19,26 @@
         <p class="news-p w-50 mb-5">
           <SanityBlocks :blocks="blocks" />
         </p>
+        <p class="related-artist mb-4">Related Artist</p>
+
+        <hr />
+        <router-link to="/news" class="news-link">
+          <div
+            class="d-flex flex-row justify-content-start align-items-center mt-3 mb-5"
+          >
+            <img
+              v-if="post.artistImage"
+              :src="imageUrlFor(post.artistImage)"
+              class="rounded-circle me-3"
+              style="width: 50px; height: 50px"
+              alt="Avatar"
+            />
+            <p class="related-artist mt-4">
+              {{ post.name }}
+            </p>
+          </div>
+        </router-link>
+        <yeb-news-list />
         <yeb-footer />
       </div>
     </div>
@@ -31,7 +51,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import YebFooter from "@/components/YebFooter.vue";
 import YebLoading from "@/components/YebLoading";
 const imageBuilder = imageUrlBuilder(sanity);
-
+import YebNewsList from "@/components/YebNewsList.vue";
 const query = `*[_type == "news" && slug.current == $slug] {
     _id,
     title,
@@ -45,13 +65,18 @@ const query = `*[_type == "news" && slug.current == $slug] {
     url
   }
   },
-  "name":author->name,
-  "authorImage":author->image
+  "name":artist->name,
+  "artistImage":artist->image
   }[0]
   `;
 export default {
   name: "SinglePost",
-  components: { SanityBlocks, YebFooter },
+  components: {
+    SanityBlocks,
+    YebFooter,
+    YebLoading,
+    YebNewsList,
+  },
   data() {
     return {
       loading: true,
@@ -112,6 +137,15 @@ export default {
   font-style: normal;
   text-transform: uppercase;
 }
+.related-artist {
+  font-size: 12.5px;
+  line-height: 23.5px;
+  letter-spacing: 1.89px;
+  font-family: "Josefin Slab", serif;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: uppercase;
+}
 .news-location {
   font-size: 12.5px;
   line-height: 18px;
@@ -166,5 +200,9 @@ export default {
     width: 100% !important;
     margin-bottom: 250px !important;
   }
+}
+.news-link {
+  text-decoration: none;
+  color: black;
 }
 </style>

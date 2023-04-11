@@ -25,6 +25,12 @@ export default defineType({
       type: 'reference',
       to: {type: 'author'},
     }),
+    defineField({
+      name: 'artist',
+      title: 'Artist',
+      type: 'reference',
+      to: {type: 'artist'},
+    }),
     {
       name: 'excerpt',
       title: 'Location',
@@ -55,6 +61,7 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}],
     }),
+
     defineField({
       name: 'publishedAt',
       title: 'Published at',

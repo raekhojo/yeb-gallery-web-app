@@ -2,7 +2,7 @@
   <yebs-navbar />
   <router-view v-slot="{ Component, route }">
     <transition name="fade" mode="out-in">
-      <section :key="route.name">
+      <section :key="route.path">
         <component :is="Component"></component>
       </section>
     </transition>

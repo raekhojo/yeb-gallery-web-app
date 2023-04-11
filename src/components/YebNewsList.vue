@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="">
     <yeb-subtitle Subtitle="News" />
     <div class="row row-cols-3 row-cols-sm-1 row-cols-md-3 g-5">
       <div
@@ -31,14 +31,14 @@ import sanity from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
 
-const query = `*[_type == "news"  ] | order(_createdAt desc){
-  _id,
-  title,
-  slug,
-  excerpt,
-  eventdate,
-  "image": mainImage.asset->url
-}  [0...6]`;
+const query = `*[_type == "news" && slug.current != $slug ] | order(_createdAt desc){
+    _id,
+    title,
+    slug,
+    excerpt,
+    eventdate,
+    "image": mainImage.asset->url
+  }  [0...3]`;
 export default {
   components: {
     YebSubtitle,
@@ -64,7 +64,7 @@ export default {
     async fetchData() {
       this.error = this.post = null;
       this.loading = true;
-      await sanity.fetch(query).then(
+      await sanity.fetch(query, { slug: this.$route.params.slug }).then(
         (posts) => {
           this.posts = posts;
           this.loading = false;
