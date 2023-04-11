@@ -9,6 +9,12 @@ export default {
   components: {
     NewsDetails,
   },
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  },
 };
 </script>
 <style></style>
