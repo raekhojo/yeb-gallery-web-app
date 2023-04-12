@@ -1,5 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-white p-0 border-0 sticky-top">
+  <nav
+    class="navbar navbar-expand-lg bg-white p-0 border-0 sticky-top shadow-sm"
+  >
     <div
       class="container-fluid container px-2 d-flex flex-row justify-content-between align-items-center"
     >

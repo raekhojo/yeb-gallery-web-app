@@ -164,11 +164,12 @@ export default {
 }
 .news-image-container {
   width: 100% !important;
-  height: 440.22px;
+  height: auto; /* sets the container height to adjust automatically as per the image */
+  max-width: 100%;
 }
 .news-image-container img {
   width: 100%;
-  height: 100%;
+  height: auto; /* sets the container height to adjust automatically as per the image */
   object-fit: cover;
 }
 .news-p {
