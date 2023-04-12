@@ -4,7 +4,8 @@ import CurrentExhibition from "../views/CurrentExhibition.vue";
 import PastExhibition from "../views/PastExhibition.vue";
 import NewsView from "../views/NewsView.vue";
 import NewsDetailsView from "../views/NewsDetailsView.vue";
-
+import ForthComing from "../views/ForthComing.vue";
+import ExhibitionDetailView from "@/views/ExhibitionDetailView";
 const routes = [
   {
     path: "/",
@@ -54,6 +55,22 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: NewsDetailsView,
+  },
+  {
+    path: "/forthcoming",
+    name: "forthcoming",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: ForthComing,
+  },
+  {
+    path: "/exhibition",
+    name: "exhibition",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: ExhibitionDetailView,
   },
 ];
 

@@ -1,8 +1,10 @@
 <template>
   <section class="container">
     <yeb-loading v-if="loading"></yeb-loading>
-    <div class="d-flex flex-row justify-content-between align-items-center">
-      <yeb-subtitle Subtitle="EXHIBITIONS" />
+    <div
+      class="exhibit d-flex flex-row justify-content-between align-items-center"
+    >
+      <yeb-subtitle Subtitle="EXHIBITIONS" class="title" />
       <ul class="navbar-nav ms-auto mb-lg-0 d-flex flex-row align-items-center">
         <li class="nav-item">
           <router-link
@@ -14,7 +16,7 @@
         </li>
         <li class="nav-item">
           <router-link
-            to="#"
+            to="/forthcoming"
             class="nav-link active fw-normal me-4"
             aria-current="page"
             >Forthcoming</router-link
@@ -194,6 +196,14 @@ export default {
   }
   .forthcoming-text {
     width: 100% !important;
+  }
+  .exhibit {
+    display: block !important;
+    margin-top: 0px !important;
+    margin-bottom: 30px !important;
+  }
+  .title {
+    margin-bottom: 10px !important ;
   }
 }
 </style>

@@ -2,55 +2,57 @@
   <div id="carouselExampleFade" class="carousel slide carousel-fade">
     <yeb-loading v-if="loading"></yeb-loading>
     <div class="carousel-inner" v-else>
-      <div
-        v-for="(post, index) in posts"
-        :key="post._id"
-        :class="{ 'carousel-item': true, active: index === 0 }"
-      >
-        <img
-          v-if="post.image"
-          :src="imageUrlFor(post.image)"
-          class="d-block w-100 parallax"
-          alt="..."
-        />
-        <div class="title w-100">
-          <div
-            class="container w-100 text-start d-flex flex-row justify-content-between align-content-center"
-          >
-            <div class="hero-text">
-              <h1 class="centered text-white">
-                {{ post.title }}
-              </h1>
-              <span class="mt-3 date-info">{{ post.eventdate }}</span>
-            </div>
-
+      <router-link to="/exhibition">
+        <div
+          v-for="(post, index) in posts"
+          :key="post._id"
+          :class="{ 'carousel-item': true, active: index === 0 }"
+        >
+          <img
+            v-if="post.image"
+            :src="imageUrlFor(post.image)"
+            class="d-block w-100 parallax"
+            alt="..."
+          />
+          <div class="title w-100">
             <div
-              class="nav-arrows d-flex flex-row align-items-center justify-content-end"
+              class="container w-100 text-start d-flex flex-row justify-content-between align-content-center"
             >
-              <a
-                class="btn control-prev"
-                data-bs-target="#carouselExampleFade"
-                data-bs-slide="prev"
-                ><img
-                  class="previous-btn-img"
-                  src="@/assets/images/arrow-open-start-svgrepo-com.svg"
-                  style="height: 13px"
-                  alt=""
-              /></a>
-              <a
-                class="btn control-next"
-                data-bs-target="#carouselExampleFade"
-                data-bs-slide="next"
-                ><img
-                  class="previous-btn-img"
-                  src="@/assets/images/arrow-open-right-svgrepo-com.svg"
-                  style="height: 13px"
-                  alt=""
-              /></a>
+              <div class="hero-text">
+                <h1 class="centered text-white">
+                  {{ post.title }}
+                </h1>
+                <span class="mt-3 date-info">{{ post.eventdate }}</span>
+              </div>
+
+              <div
+                class="nav-arrows d-flex flex-row align-items-center justify-content-end"
+              >
+                <a
+                  class="btn control-prev"
+                  data-bs-target="#carouselExampleFade"
+                  data-bs-slide="prev"
+                  ><img
+                    class="previous-btn-img"
+                    src="@/assets/images/arrow-open-start-svgrepo-com.svg"
+                    style="height: 13px"
+                    alt=""
+                /></a>
+                <a
+                  class="btn control-next"
+                  data-bs-target="#carouselExampleFade"
+                  data-bs-slide="next"
+                  ><img
+                    class="previous-btn-img"
+                    src="@/assets/images/arrow-open-right-svgrepo-com.svg"
+                    style="height: 13px"
+                    alt=""
+                /></a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>

@@ -67,6 +67,23 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'exhibitionImage',
+      title: 'Exhibition image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'installationViewImage',
+      title: 'Installation View',
+      type: 'array',
+      of: [{type: 'image'}],
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
