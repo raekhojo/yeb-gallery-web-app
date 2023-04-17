@@ -65,7 +65,7 @@ const routes = [
     component: ForthComing,
   },
   {
-    path: "/exhibition",
+    path: "/exhibition/:slug",
     name: "exhibition",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

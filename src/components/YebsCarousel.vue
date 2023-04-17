@@ -2,12 +2,12 @@
   <div id="carouselExampleFade" class="carousel slide carousel-fade">
     <yeb-loading v-if="loading"></yeb-loading>
     <div class="carousel-inner" v-else>
-      <router-link to="/exhibition">
-        <div
-          v-for="(post, index) in posts"
-          :key="post._id"
-          :class="{ 'carousel-item': true, active: index === 0 }"
-        >
+      <div
+        v-for="(post, index) in posts"
+        :key="post._id"
+        :class="{ 'carousel-item': true, active: index === 0 }"
+      >
+        <router-link :to="`/exhibition/${post.slug.current}`">
           <img
             v-if="post.image"
             :src="imageUrlFor(post.image)"
@@ -51,8 +51,8 @@
               </div>
             </div>
           </div>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container" v-for="post in posts" :key="post._id">
     <div class="d-flex flex-row justify-content-between align-items-center">
       <yeb-subtitle Subtitle="EXHIBITIONS" />
       <ul class="navbar-nav ms-auto mb-lg-0 d-flex flex-row align-items-center">
@@ -29,37 +29,40 @@
         </li>
       </ul>
     </div>
-    <div
-      data-aos="fade-up"
-      data-aos-duration="1500"
-      v-for="post in posts"
-      :key="post._id"
-      class="forth mb-5 d-flex flex-row justify-content-between ms-2 align-items-center"
+    <router-link
+      class="text-decoration-none text-dark"
+      :to="`/exhibition/${post.slug.current}`"
     >
-      <div class="forthcoming-image">
-        <div class="forth-coming-image">
-          <img
-            v-if="post.image"
-            :src="imageUrlFor(post.image)"
-            alt=""
-            class="img-fluid"
-          />
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        class="forth mb-5 d-flex flex-row justify-content-between ms-2 align-items-center"
+      >
+        <div class="forthcoming-image">
+          <div class="forth-coming-image">
+            <img
+              v-if="post.image"
+              :src="imageUrlFor(post.image)"
+              alt=""
+              class="img-fluid"
+            />
+          </div>
+        </div>
+        <div class="forthcoming-text">
+          <h2>{{ post.title }}</h2>
+          <span> {{ post.eventlocation }}</span>
+          <hr />
+          <span>{{ post.eventdate }}</span>
+          <p class="mt-3">
+            {{ post.brief }}
+          </p>
+
+          <router-link to="#" class="forthcoming-link text-dark">
+            READ MORE</router-link
+          >
         </div>
       </div>
-      <div class="forthcoming-text">
-        <h2>{{ post.title }}</h2>
-        <span> {{ post.eventlocation }}</span>
-        <hr />
-        <span>{{ post.eventdate }}</span>
-        <p class="mt-3">
-          {{ post.brief }}
-        </p>
-
-        <router-link to="#" class="forthcoming-link text-dark">
-          READ MORE</router-link
-        >
-      </div>
-    </div>
+    </router-link>
   </section>
 </template>
 

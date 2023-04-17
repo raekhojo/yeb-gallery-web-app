@@ -1,17 +1,19 @@
 <template>
   <section class="">
-    <div class="exhibition-hero">
+    <yeb-loading v-if="loading"></yeb-loading>
+    <div class="exhibition-hero" v-if="post">
       <img
-        src="@/assets/images/31-gallery-1957-london-individuals-march-2023med-res.jpg"
+        v-if="post.image"
+        :src="imageUrlFor(post.image)"
         alt=""
         class="parallax"
       />
     </div>
-    <div class="container detail-content">
+    <div class="container detail-content" v-if="post">
       <div
         class="d-link d-flex flex-row justify-content-end align-items-center"
       >
-        <ul
+        <!-- <ul
           class="navbar-nav ms-auto mb-lg-0 d-flex flex-row align-items-center"
         >
           <li class="nav-item">
@@ -20,7 +22,7 @@
               aria-current="page"
               to="/current-exhibition"
               >Current</router-link
-            >
+            > 
           </li>
           <li class="nav-item">
             <router-link
@@ -38,10 +40,10 @@
               >Past</router-link
             >
           </li>
-        </ul>
+        </ul> -->
       </div>
       <h1 class="exhibition-detail-title">
-        CENTRAL ELECTRICITY AND WATER ADMINISTRATION
+        {{ post.title }}
       </h1>
       <div
         class="d-time d-flex flex-row justify-content-between align-content-center"
@@ -51,7 +53,7 @@
             <h1
               class="news-location mb-5 d-flex flex-row justify-content-start align-items-center"
             >
-              LONDON 16 MAR - 10 MAY 2023
+              {{ post.eventlocation }} {{ post.eventdate }}
             </h1>
           </div>
         </div>
@@ -75,30 +77,6 @@
                 >Installation Views</router-link
               >
             </li>
-            <li class="nav-item">
-              <router-link
-                to="/past-exhibition"
-                class="nav-link active fw-normal me-4"
-                aria-current="page"
-                >Works</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link
-                to="/past-exhibition"
-                class="nav-link active fw-normal me-4"
-                aria-current="page"
-                >Press</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link
-                to="/past-exhibition"
-                class="nav-link active fw-normal me-4"
-                aria-current="page"
-                >Publications</router-link
-              >
-            </li>
           </ul>
         </div>
       </div>
@@ -109,65 +87,119 @@
           >
             <div class="exhibition-quote-image">
               <img
-                src="@/assets/images/g1957-sem-40-a-mr.jpg"
+                v-if="post.exhibitionImage"
+                :src="imageUrlFor(post.exhibitionImage)"
                 alt=""
                 class="img-fluid"
               />
             </div>
           </div>
           <div class="two">
-            <div class="exhibition-quote-border px-5">
+            <div v-if="post.brief" class="exhibition-quote-border px-5">
               <span class="exhibition-quote">
-                “I still remember the bill collector knocking on the door. And I
-                see the water tanks. Towers made of cement; high rises loaded
-                with water that break the sky... These beautiful buildings touch
-                my heart and soul.” – Salah Elmur, 2022
+                {{ post.brief }}
               </span>
             </div>
-            <p class="exhibition-p mt-5">
-              Gallery 1957 and Vigo Gallery are proud to collaborate on a joint
-              exhibition and publication of monumental new paintings, set across
-              both London galleries, by Cairo-based Sudanese artist Salah Elmur
-              (Sudan, 1966). Central Electricity and Water Administration will
-              be the artist’s second solo show with Gallery 1957 following An
-              Anniverary presented in Accra in October 2021.
-            </p>
-            <p class="exhibition-p mt-5">
-              Gallery 1957 and Vigo Gallery are proud to collaborate on a joint
-              exhibition and publication of monumental new paintings, set across
-              both London galleries, by Cairo-based Sudanese artist Salah Elmur
-              (Sudan, 1966). Central Electricity and Water Administration will
-              be the artist’s second solo show with Gallery 1957 following An
-              Anniverary presented in Accra in October 2021.
-            </p>
-            <p class="exhibition-p mt-5">
-              Gallery 1957 and Vigo Gallery are proud to collaborate on a joint
-              exhibition and publication of monumental new paintings, set across
-              both London galleries, by Cairo-based Sudanese artist Salah Elmur
-              (Sudan, 1966). Central Electricity and Water Administration will
-              be the artist’s second solo show with Gallery 1957 following An
-              Anniverary presented in Accra in October 2021.
+            <p class="exhibition-p mt-5 mb-5">
+              <SanityBlocks :blocks="blocks" />
             </p>
           </div>
         </div>
+        <yeb-subtitle
+          v-if="post.installationViewImage"
+          Subtitle="Installation
+        View"
+          class="mb-5 mt-5"
+        />
+        <div class="row row-cols-3 row-cols-sm-1 row-cols-md-3 g-5">
+          <div
+            class="col mb-3"
+            v-for="image in post.installationViewImage"
+            :key="image._id"
+          >
+            <div class="installation">
+              <img
+                v-if="image.asset.url"
+                :src="imageUrlFor(image.asset.url)"
+                alt=""
+                class="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-        cumque officiis repellat porro unde! Excepturi ipsa, et omnis quidem
-        aperiam reprehenderit, laboriosam dolorem inventore autem voluptatum eos
-        quae, mollitia iste.s
-      </h1>
     </div>
   </section>
+  <yeb-footer />
 </template>
 
 <script>
+import { SanityBlocks } from "sanity-blocks-vue-component";
+import sanity from "../client";
+import imageUrlBuilder from "@sanity/image-url";
+import YebFooter from "@/components/YebFooter.vue";
+import YebLoading from "@/components/YebLoading";
+import YebSubtitle from "@/components/YebSubtitle.vue";
+const imageBuilder = imageUrlBuilder(sanity);
+const query = `*[slug.current == $slug] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    brief,
+    eventdate,
+    eventlocation,
+    installationViewImage[] {
+          asset-> {
+            _id,
+            url,
+          }
+        },
+    body, 
+   "image": mainImage{
+    asset->{
+    _id,
+    url
+  },
+  },
+   "image": mainImage{
+    asset->{
+    _id,
+    url
+  },
+  },
+  "exhibitionImage": exhibitionImage{
+    asset->{
+    _id,
+    url
+  },
+},
+  "name":artist->name,
+  "artistImage":artist->image
+  }[0]
+  `;
 export default {
+  components: {
+    SanityBlocks,
+    YebFooter,
+    YebLoading,
+    YebSubtitle,
+  },
+  data() {
+    return {
+      loading: true,
+      post: [],
+      blocks: [],
+    };
+  },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
+  },
+  created() {
+    this.fetchData();
   },
   methods: {
     // handleScroll() {
@@ -180,6 +212,26 @@ export default {
     //     element.style.transform = `translate3d(0, ${y}px, 0)`;
     //   }
     // },
+    imageUrlFor(source) {
+      return imageBuilder.image(source);
+    },
+    fetchData() {
+      this.error = this.post = null;
+      this.loading = true;
+
+      sanity.fetch(query, { slug: this.$route.params.slug }).then(
+        (post) => {
+          this.loading = false;
+          this.post = post;
+          console.log(post);
+          this.blocks = post.body;
+          console.log(post.body);
+        },
+        (error) => {
+          this.error = error;
+        }
+      );
+    },
   },
 };
 </script>
@@ -206,6 +258,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 0px 10%;
 }
 
 .detail-content {
@@ -254,9 +307,18 @@ export default {
 }
 
 .exhibition-quote-image {
-  width: 284px;
+  width: 80%;
   height: auto; /* sets the container height to adjust automatically as per the image */
   max-width: 100%;
+}
+.installation {
+  width: 100%;
+  height: 346.63px;
+}
+.installation img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .exhibition-quote-image img {
   width: 100%;
@@ -317,6 +379,15 @@ export default {
     margin-bottom: 100px !important;
   }
   .two {
+    width: 100% !important;
+  }
+  .col {
+    width: 100% !important;
+  }
+  .installation {
+    width: 100% !important;
+  }
+  .installation img {
     width: 100% !important;
   }
 }

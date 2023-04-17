@@ -9,17 +9,22 @@
         v-for="post in posts"
         :key="post._id"
       >
-        <div class="project-image">
-          <img
-            v-if="post.image"
-            :src="imageUrlFor(post.image)"
-            class="img-fluid"
-            alt=""
-          />
-        </div>
-        <h2 class="project-title mt-4">{{ post.title }}</h2>
-        <span class="mt-3 date-info d-block">{{ post.eventlocation }}</span>
-        <span class="mt-5 date-info"> {{ post.eventdate }}</span>
+        <router-link
+          class="text-decoration-none text-dark"
+          :to="`/exhibition/${post.slug.current}`"
+        >
+          <div class="project-image">
+            <img
+              v-if="post.image"
+              :src="imageUrlFor(post.image)"
+              class="img-fluid"
+              alt=""
+            />
+          </div>
+          <h2 class="project-title mt-4">{{ post.title }}</h2>
+          <span class="mt-3 date-info d-block">{{ post.eventlocation }}</span>
+          <span class="mt-5 date-info"> {{ post.eventdate }}</span>
+        </router-link>
       </div>
     </div>
   </section>
