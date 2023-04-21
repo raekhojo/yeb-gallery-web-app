@@ -4,39 +4,13 @@
     <div
       class="exhibit d-flex flex-row justify-content-between align-items-center"
     >
-      <yeb-subtitle Subtitle="EXHIBITIONS" class="title" />
-      <ul class="navbar-nav ms-auto mb-lg-0 d-flex flex-row align-items-center">
-        <li class="nav-item">
-          <router-link
-            class="nav-link active fw-normal me-4"
-            aria-current="page"
-            to="/current-exhibition"
-            >Current</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link
-            to="/forthcoming"
-            class="nav-link active fw-normal me-4"
-            aria-current="page"
-            >Forthcoming</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link
-            to="/past-exhibition"
-            class="nav-link active fw-normal me-4"
-            aria-current="page"
-            >Past</router-link
-          >
-        </li>
-      </ul>
+      <yeb-subtitle Subtitle="Forthcoming" class="title" />
     </div>
     <router-link
       v-for="post in posts"
       :key="post._id"
       class="text-decoration-none text-dark"
-      :to="`/exhibition/${post.slug.current}`"
+      :to="`/art-fairs/${post.slug.current}`"
     >
       <div
         data-aos="fade-up"
@@ -55,7 +29,7 @@
         </div>
         <div class="forthcoming-text">
           <h2>{{ post.title }}</h2>
-          <span> {{ post.eventlocation }}</span>
+          <span> {{ post.exhibitingartist }}</span>
           <hr />
           <span>{{ post.eventdate }}</span>
           <p class="mt-3">
@@ -77,16 +51,15 @@ import YebLoading from "@/components/YebLoading";
 import sanity from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
-const query = `*[_type == "post" && "current" in categories[]->title] | order(_createdAt desc){
-  _id,
-  title,
-  slug,
-  excerpt,
-  eventdate,
-  eventlocation,
-  brief,
-  "image": mainImage.asset->url
-}  [0...50]`;
+const query = `*[_type == "fairs" && "forthcoming" in categories[]->title] | order(_createdAt desc){
+    _id,
+    title,
+    slug,
+    exhibitingartist,
+    eventdate,
+    brief,
+    "image": mainImage.asset->url
+  }  [0...50]`;
 export default {
   components: {
     YebSubtitle,
@@ -168,7 +141,7 @@ export default {
   line-height: 40px;
   vertical-align: baseline;
   letter-spacing: 4.8px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .forthcoming-text span {
@@ -177,7 +150,7 @@ export default {
   vertical-align: baseline;
   letter-spacing: 2px;
   word-spacing: 0px;
-  font-weight: 200;
+  font-weight: 600;
 }
 .forthcoming-text p {
   font-size: 13.05px;

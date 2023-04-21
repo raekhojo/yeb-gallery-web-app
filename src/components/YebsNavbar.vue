@@ -81,6 +81,15 @@
             >
           </li>
           <li class="nav-item">
+            <router-link
+              to="/art-fair"
+              class="nav-link active fw-normal me-4"
+              aria-current="page"
+              href="#contact"
+              >Fairs</router-link
+            >
+          </li>
+          <li class="nav-item">
             <a
               class="nav-link active fw-normal me-3"
               aria-current="page"

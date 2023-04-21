@@ -6,6 +6,8 @@ import NewsView from "../views/NewsView.vue";
 import NewsDetailsView from "../views/NewsDetailsView.vue";
 import ForthComing from "../views/ForthComing.vue";
 import ExhibitionDetailView from "@/views/ExhibitionDetailView";
+import YebsFair from "@/views/YebsFair.vue";
+import YebFairsDetail from "@/views/YebFairsDetail.vue";
 const routes = [
   {
     path: "/",
@@ -15,61 +17,50 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
     path: "/current-exhibition",
     name: "current-exhibition",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CurrentExhibition.vue"),
   },
   {
     path: "/past-exhibition",
     name: "past-exhibition",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/PastExhibition.vue"),
   },
   {
     path: "/news",
     name: "news",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/NewsView.vue"),
   },
   {
     path: "/news/:slug",
     name: "newsdetailsview",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: NewsDetailsView,
   },
   {
     path: "/forthcoming",
     name: "forthcoming",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: ForthComing,
+  },
+  {
+    path: "/art-fair",
+    name: "art-fair",
+    component: YebsFair,
+  },
+  {
+    path: "/art-fairs/:slug",
+    name: "art-fairs",
+    component: YebFairsDetail,
   },
   {
     path: "/exhibition/:slug",
     name: "exhibition",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: ExhibitionDetailView,
   },
 ];

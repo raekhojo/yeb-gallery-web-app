@@ -20,31 +20,15 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
-    }),
-    defineField({
       name: 'exhibitingartist',
       title: 'Exhibiting Artist',
-      type: 'array',
-      of: [{type: 'string'}],
+      type: 'string',
     }),
     defineField({
       name: 'brief',
       title: 'Brief',
       type: 'string',
     }),
-    {
-      name: 'location',
-      title: 'Location',
-      type: 'string',
-      options: {
-        maxLength: 200,
-      },
-    },
-
     {
       name: 'eventdate',
       title: 'Date Of The Event',
@@ -53,9 +37,34 @@ export default defineType({
         maxLength: 200,
       },
     },
+    {
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      options: {
+        maxLength: 200,
+      },
+    },
+    {
+      name: 'galleryLink',
+      title: 'Gallery Web Link',
+      type: 'string',
+      options: {
+        maxLength: 200,
+      },
+    },
+
     defineField({
       name: 'mainImage',
       title: 'Main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'gallerylogo',
+      title: 'Gallery Logo',
       type: 'image',
       options: {
         hotspot: true,

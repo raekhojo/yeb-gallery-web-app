@@ -10,9 +10,9 @@ import $ from "jquery";
 import { VueMasonryPlugin } from "vue-masonry";
 
 createApp(App)
-  .use(store)
-  .use(router)
-  .use($)
-  .use(AOS.init())
-  .use(VueMasonryPlugin)
-  .mount("#app");
+    .use(store)
+    .use(router)
+    .use($)
+    .use(AOS.init())
+    .use(VueMasonryPlugin)
+    .mount("#app");
