@@ -71,7 +71,7 @@
               >News</router-link
             >
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link
               to="#"
               class="nav-link active fw-normal me-4"
@@ -79,7 +79,7 @@
               href="#contact"
               >Press</router-link
             >
-          </li>
+          </li> -->
           <li class="nav-item">
             <router-link
               to="/art-fair"
