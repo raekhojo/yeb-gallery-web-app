@@ -8,66 +8,71 @@ import ForthComing from "../views/ForthComing.vue";
 import ExhibitionDetailView from "@/views/ExhibitionDetailView";
 import YebsFair from "@/views/YebsFair.vue";
 import YebFairsDetail from "@/views/YebFairsDetail.vue";
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-  {
-    path: "/current-exhibition",
-    name: "current-exhibition",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CurrentExhibition.vue"),
-  },
-  {
-    path: "/past-exhibition",
-    name: "past-exhibition",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PastExhibition.vue"),
-  },
-  {
-    path: "/news",
-    name: "news",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/NewsView.vue"),
-  },
-  {
-    path: "/news/:slug",
-    name: "newsdetailsview",
-    component: NewsDetailsView,
-  },
-  {
-    path: "/forthcoming",
-    name: "forthcoming",
-    component: ForthComing,
-  },
-  {
-    path: "/art-fair",
-    name: "art-fair",
-    component: YebsFair,
-  },
-  {
-    path: "/art-fairs/:slug",
-    name: "art-fairs",
-    component: YebFairsDetail,
-  },
-  {
-    path: "/exhibition/:slug",
-    name: "exhibition",
-    component: ExhibitionDetailView,
-  },
+import YebArtist from "@/views/YebArtist.vue";
+const routes = [{
+        path: "/",
+        name: "home",
+        component: HomeView,
+    },
+    {
+        path: "/about",
+        name: "about",
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    },
+    {
+        path: "/current-exhibition",
+        name: "current-exhibition",
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../views/CurrentExhibition.vue"),
+    },
+    {
+        path: "/past-exhibition",
+        name: "past-exhibition",
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../views/PastExhibition.vue"),
+    },
+    {
+        path: "/news",
+        name: "news",
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../views/NewsView.vue"),
+    },
+    {
+        path: "/news/:slug",
+        name: "newsdetailsview",
+        component: NewsDetailsView,
+    },
+    {
+        path: "/forthcoming",
+        name: "forthcoming",
+        component: ForthComing,
+    },
+    {
+        path: "/art-fair",
+        name: "art-fair",
+        component: YebsFair,
+    },
+    {
+        path: "/art-fairs/:slug",
+        name: "art-fairs",
+        component: YebFairsDetail,
+    },
+    {
+        path: "/exhibition/:slug",
+        name: "exhibition",
+        component: ExhibitionDetailView,
+    },
+    {
+        path: "/artists",
+        name: "artist",
+        component: YebArtist,
+    },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
 });
 
 export default router;

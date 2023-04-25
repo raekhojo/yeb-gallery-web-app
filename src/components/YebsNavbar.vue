@@ -40,10 +40,10 @@
         >
           <li class="nav-item">
             <router-link
-              to="/about"
+              to="/artists"
               class="nav-link active fw-normal me-4"
               aria-current="page"
-              >Artist</router-link
+              >Artists</router-link
             >
           </li>
           <li class="nav-item">
@@ -90,11 +90,12 @@
             >
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link active fw-normal me-3"
+            <router-link
+              to="/about"
+              class="nav-link active fw-normal me-4"
               aria-current="page"
               href="#contact"
-              >Contact</a
+              >About</router-link
             >
           </li>
         </ul>

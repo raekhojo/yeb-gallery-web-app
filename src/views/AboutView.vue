@@ -1,5 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <yeb-about-component />
 </template>
+
+<script>
+import YebAboutComponent from "@/components/YebAboutComponent.vue";
+export default {
+  components: {
+    YebAboutComponent,
+  },
+};
+</script>
+
+<style></style>
