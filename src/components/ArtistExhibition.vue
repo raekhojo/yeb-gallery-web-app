@@ -1,8 +1,7 @@
 <template>
-  <section class="container">
-    <yeb-loading v-if="loading"></yeb-loading>
-    <yeb-subtitle class="fw-bolder" v-else Subtitle="Various Artist" />
-    <div class="row row-cols-3 row-cols-sm-1 row-cols-md-3 g-5">
+  <section class="artist">
+    <yeb-subtitle Subtitle="Exhibitions" />
+    <div class="row row-cols-2 row-cols-sm-1 row-cols-md-2 g-5">
       <div
         class="col mb-4"
         data-aos="fade-up"
@@ -10,7 +9,10 @@
         v-for="post in posts"
         :key="post._id"
       >
-        <router-link :to="`/artists/${post.slug.current}`" class="news-link">
+        <router-link
+          class="text-decoration-none text-dark"
+          :to="`/exhibition/${post.slug.current}`"
+        >
           <div class="project-image">
             <img
               v-if="post.image"
@@ -19,11 +21,9 @@
               alt=""
             />
           </div>
-          <h2 class="project-title mt-4">{{ post.name }}</h2>
-          <span class="mb-3 date-info d-block">{{
-            post.exhibitingartist
-          }}</span>
-          <span class="date-info">{{ post.eventdate }}</span>
+          <h2 class="project-title mt-4">{{ post.title }}</h2>
+          <span class="mt-3 date-info d-block">{{ post.eventlocation }}</span>
+          <span class="mt-5 date-info"> {{ post.eventdate }}</span>
         </router-link>
       </div>
     </div>
@@ -31,35 +31,37 @@
 </template>
 <script>
 import YebSubtitle from "@/components/YebSubtitle.vue";
-import YebLoading from "@/components/YebLoading";
 import sanity from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 const imageBuilder = imageUrlBuilder(sanity);
 
-const query = `*[_type == "artist" ] | order(_createdAt desc){
-        _id,
-        name,
-        slug,
-        "image": image.asset->url
-      }  [0...50]`;
+const query = `*[_type == "post" && slug.current != $slug ] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      eventdate,
+      eventlocation,
+      "image": mainImage.asset->url,
+       "name":artist->name,
+  "artistImage":artist->image
+    }  [0...6]`;
 export default {
   components: {
     YebSubtitle,
-    YebLoading,
   },
   data() {
     return {
       posts: [],
-      loading: true,
     };
   },
   created() {
     this.fetchData();
-    // setInterval(this.fetchData, 5000);
+    setInterval(this.fetchData, 5000);
   },
   mounted() {
     this.fetchData();
-    // setInterval(this.fetchData, 5000);
+    setInterval(this.fetchData, 5000);
     this.imageUrlFor();
   },
   methods: {
@@ -69,7 +71,7 @@ export default {
     async fetchData() {
       this.error = this.post = null;
       this.loading = true;
-      await sanity.fetch(query).then(
+      await sanity.fetch(query, { slug: this.$route.params.slug }).then(
         (posts) => {
           this.posts = posts;
           console.log(posts);
@@ -98,39 +100,38 @@ export default {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+}
+.artist {
   margin-top: 100px !important;
 }
 
 .project-title {
-  font-size: 16.2px;
+  font-size: 18px;
   text-transform: uppercase;
   font-family: "Josefin Slab", serif;
-  line-height: 20px;
-  vertical-align: baseline;
-  letter-spacing: 2.64px;
+  line-height: 25px;
+  vertical-align: top;
+  letter-spacing: 2px;
   word-spacing: 0px;
-  margin: 0px 0px 15px;
-  padding: 0px;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 .project-image {
-  width: 550px;
-  height: 250px; /* sets the container height to adjust automatically as per the image */
-  max-width: 100%;
+  width: 526.63px;
+  height: 331.08px;
 }
 
 .project-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   object-position: top;
+  object-fit: cover;
 }
 
 .date-info {
-  color: #000000;
+  color: #585858;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 16px;
   vertical-align: baseline;
   letter-spacing: 1.84px;
@@ -144,10 +145,5 @@ export default {
     height: 384px !important;
     width: 100% !important;
   }
-}
-
-.news-link {
-  text-decoration: none;
-  color: black;
 }
 </style>
